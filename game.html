@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>River Raid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Azul claro para o fundo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+        }
+        
+        canvas {
+            background-color: #ccc; /* Azul claro */
+            border: 2px solid black;
+        }
+
+        .hud {
+            display: flex;
+            align-items: start;
+            justify-self: start;
+            flex-direction: column;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-align: right;
+            font-size: 20px;
+            color: #333; /* Cor do texto */
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo semitransparente */
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra */
+            width: 300px;
+        }
+
+        .game-over {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background-color: rgb(27, 26, 26); /* Fundo vermelho semitransparente */
+            color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra */
+            z-index: 1000; /* Fica acima do canvas */
+        }
+        p{
+            background-color: #333;
+            border-radius: 5px;
+            margin: 5px auto;
+            color: white;
+            padding: 10px;
+            width: 270px;
+            display: flex;
+            align-items: start;
+        }
+
+        .game-over h1 {
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .game-over p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .game-over button {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .game-over button:hover {
+            background-color: #ccc; /* Cor de fundo ao passar o mouse */
+        }
+        #hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            color: white;
+        }
+
+        #fuelContainer {
+            width: 200px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.3); /* Fundo semi-transparente */
+            border-radius: 5px;
+            overflow: hidden; /* Para esconder o excesso da barra */
+        }
+
+        #fuelBar {
+            height: 100%;
+            background-color: green; /* Cor da barra de combustível */
+            width: 100%; /* Começa cheia */
+            transition: width 0.2s; /* Animação suave na alteração da largura */
+        }
+        .hud img {
+            width: 20px; /* Tamanho dos ícones de coração */
+            height: 20px; /* Tamanho dos ícones de coração */
+            margin-top: 3px;
+            margin-left: 5px;
+        }
+        span{
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="500" height="650"></canvas>
+        <div id="fuelContainer" style="width: 500px;" >
+            <div id="fuelBar"></div>
+        </div>
+        <div class="hud">
+            <p>Combustível: <span id="fuel">100</span>%</p>
+            <p>Pontos: <span id="score">0</span></p>
+            <p>Vidas: <span id="livesContainer"><img src="images/coracao.png" alt=""></span></p>
+        </div>
+
+        <div class="game-over" id="gameOverScreen">
+            <h1>Fim de Jogo!</h1>
+            <p>Pontuação Final: <span id="finalScore">0</span></p>
+            <button onclick="restartGame()">Reiniciar</button>
+        </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
